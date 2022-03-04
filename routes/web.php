@@ -1,7 +1,8 @@
 <?php
-
+namespace App\Http\Controllers\Backend;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/admin1', function () {
-    return view('admin');
+    return view('admin.layouts.Dashboard.home');
 });
-
+Route::resource('category', CategoryController::class);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+ Route::get('/home', [HomeController::class, 'index'])->name('home');
