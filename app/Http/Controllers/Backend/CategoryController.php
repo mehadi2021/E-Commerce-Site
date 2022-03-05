@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +12,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        return view('admin.layouts.Category.category-create');
+          $lists=Category::all();
+        //   dd($lists);
+        return view('admin.layouts.Category.category-list',compact('lists'));
+
     }
 
     /**
@@ -24,7 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+          return view('admin.layouts.Category.category-create');
     }
 
     /**
@@ -35,7 +42,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        Category::create([
+             'name'=>$request->name,
+              'details'=>$request->details
+
+
+        ]);
+
+
+
     }
 
     /**
@@ -46,7 +62,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        
+    
     }
 
     /**

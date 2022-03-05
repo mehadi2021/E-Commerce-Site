@@ -17,10 +17,17 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Auth::routes();
 Route::get('/admin1', function () {
     return view('admin.layouts.Dashboard.home');
 });
-Route::resource('category', CategoryController::class);
-Auth::routes();
+Route::middleware(['auth'])->group(function () {
 
+});
+Route::resource('category/create', CategoryController::class);
+Route::resource('category/store', CategoryController::class);
+// Route::get('category list', [CategoryController::class,'index'])->name('category.index');
+  Route::resource('category', CategoryController::class);
  Route::get('/home', [HomeController::class, 'index'])->name('home');

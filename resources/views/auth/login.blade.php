@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{ url('/admin/css/main.css') }}">
+
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Login - Vali Admin</title>
@@ -21,6 +24,7 @@
       </div>
       <div class="login-box">
         <form class="login-form" method="POST" action="{{ route('login') }}">
+            @csrf
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
           <div class="form-group">
             <label class="control-label">{{ __('Email Address') }}</label>
@@ -30,7 +34,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-  
+
         </div>
           <div class="form-group">
             <label class="control-label">PASSWORD</label>
@@ -54,7 +58,7 @@
                 @if (Route::has('password.request'))
                  <p class="semibold-text mb-2"><a href="{{ route('password.request') }}">Forgot Password ?</a></p>
                                 @endif
-             
+
             </div>
           </div>
           <div class="form-group btn-container">
@@ -62,7 +66,7 @@
           </div>
         </form>
 
-          
+
       </div>
     </section>
     <!-- Essential javascripts for application to work-->
