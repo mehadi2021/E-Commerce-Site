@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -12,10 +13,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//     {
+//         $this->middleware('auth');
+//     }
     public function index()
     {
           $lists=Category::all();
@@ -74,7 +75,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+              $list=Category::find($id);
+      return view('admin.layouts.Category.category-edit',compact('list'));
     }
 
     /**
@@ -86,7 +88,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $lists=Category::find($id);
+   $lists->update([
+              'name'=>$request->name,
+              'details'=>$request->details
+
+
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -97,6 +107,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $list=Category::find($id);
+      $list->delete();
+      return redirect()->back();
+
     }
 }

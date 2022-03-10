@@ -19,15 +19,20 @@ Route::get('/', function () {
 });
 
 
+
 Auth::routes();
 Route::get('/admin1', function () {
     return view('admin.layouts.Dashboard.home');
 });
 Route::middleware(['auth'])->group(function () {
-
-});
 Route::resource('category/create', CategoryController::class);
 Route::resource('category/store', CategoryController::class);
-// Route::get('category list', [CategoryController::class,'index'])->name('category.index');
-  Route::resource('category', CategoryController::class);
+ Route::resource('category', CategoryController::class);
+  Route::resource('category/{$id}', CategoryController::class);
+  Route::resource('category/{$id}/edit', CategoryController::class);
+  Route::resource('category/{$id}', CategoryController::class);
+//  Route::get('category list', [CategoryController::class,'index'])->name('category.index');
+
  Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+});
