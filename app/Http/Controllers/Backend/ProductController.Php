@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -25,8 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-         return view('admin.layouts.Product.product-create');
+        $lists=Category::all();
+         return view('admin.layouts.Product.product-create',compact('lists'));
     }
 
     /**
@@ -37,7 +38,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'details'=>$request->details,
+            'category_id'=>$request->category_id
+
+        ]);
+        return redirect()->back();
     }
 
     /**
